@@ -47,7 +47,7 @@ export default function TripDetailClient({ trip }: TripDetailClientProps) {
         </div>
         <div className='mt-4 md:mt-0'>
           <Link href={`/trips/${trip.id}/itinerary/new`}>
-            <Button>
+            <Button className='cursor-pointer'>
               <FaPlus className='mr-2 h-5 w-5' />
               Add Location
             </Button>
