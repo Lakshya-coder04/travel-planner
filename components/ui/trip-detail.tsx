@@ -9,9 +9,14 @@ import { Button } from './button';
 import { Tabs, TabsTrigger } from './tabs';
 import { TabsContent, TabsList } from '@radix-ui/react-tabs';
 import { useState } from 'react';
+import { LuMapPin } from 'react-icons/lu';
+
+export type TripWithLocation = Trip & {
+  locations: Location[];
+};
 
 interface TripDetailClientProps {
-  trip: Trip;
+  trip: TripWithLocation;
 }
 
 export default function TripDetailClient({ trip }: TripDetailClientProps) {
@@ -39,7 +44,7 @@ export default function TripDetailClient({ trip }: TripDetailClientProps) {
 
           <div className='flex justify-start items-center text-gray-500 mt-2'>
             <SlCalender />
-            <span className=' text-md'>
+            <span className='text-md'>
               {trip.startDate.toLocaleDateString()} -{' '}
               {trip.endDate.toLocaleDateString()}
             </span>
@@ -81,17 +86,21 @@ export default function TripDetailClient({ trip }: TripDetailClientProps) {
                         {trip.startDate.toLocaleDateString()} -{' '}
                         {trip.endDate.toLocaleDateString()}
                         <br />
-                        {`${
-                          Math.round(
-                            trip.endDate.getTime() - trip.startDate.getTime()
-                          ) /
-                          (1000 * 60 * 60 * 24)
-                        } days(s)`}
+                        {`${Math.round(
+                          (trip.endDate.getTime() - trip.startDate.getTime()) /
+                            (1000 * 60 * 60 * 24)
+                        )} day(s)`}
                       </p>
                     </div>
                   </div>
 
-                  <div className='flex items-start'></div>
+                  <div className='flex items-start'>
+                    <LuMapPin className='h-6 w-6 mr-3 text-gray-500 ' />
+                    <div>
+                      <p>Destinations</p>
+                      <p> {trip.locations.length}</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
