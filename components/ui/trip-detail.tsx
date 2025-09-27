@@ -10,6 +10,7 @@ import { Tabs, TabsTrigger } from './tabs';
 import { TabsContent, TabsList } from '@radix-ui/react-tabs';
 import { useState } from 'react';
 import { LuMapPin } from 'react-icons/lu';
+import Map from '@/components/Map';
 
 export type TripWithLocation = Trip & {
   locations: Location[];
@@ -21,6 +22,10 @@ interface TripDetailClientProps {
 
 export default function TripDetailClient({ trip }: TripDetailClientProps) {
   const [activeTab, setActiveTab] = useState('overview');
+
+  const formatDate = (date: Date) => {
+    return date.toISOString().split('T')[0]; // YYYY-MM-DD
+  };
 
   return (
     <div className='container mx-auto px-4 py-8 space-y-8'>
@@ -44,9 +49,8 @@ export default function TripDetailClient({ trip }: TripDetailClientProps) {
 
           <div className='flex justify-start items-center text-gray-500 mt-2'>
             <SlCalender />
-            <span className='text-md'>
-              {trip.startDate.toLocaleDateString()} -{' '}
-              {trip.endDate.toLocaleDateString()}
+            <span className='ml-3 text-md'>
+              {formatDate(trip.startDate)} - {formatDate(trip.endDate)}
             </span>
           </div>
         </div>
@@ -83,8 +87,8 @@ export default function TripDetailClient({ trip }: TripDetailClientProps) {
                     <div>
                       <p className='font-medium text-gray-700'>Dates</p>
                       <p className='text-sm text-gray-500'>
-                        {trip.startDate.toLocaleDateString()} -{' '}
-                        {trip.endDate.toLocaleDateString()}
+                        {formatDate(trip.startDate)} -{' '}
+                        {formatDate(trip.endDate)}
                         <br />
                         {`${Math.round(
                           (trip.endDate.getTime() - trip.startDate.getTime()) /
@@ -102,6 +106,9 @@ export default function TripDetailClient({ trip }: TripDetailClientProps) {
                     </div>
                   </div>
                 </div>
+              </div>
+              <div className='h-72 rounded-lg overflow-hidden shadow'>
+                <Map itineraries={trip.locations} />
               </div>
             </div>
           </TabsContent>
