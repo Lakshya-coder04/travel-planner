@@ -22,7 +22,7 @@ export default function Map({ itineraries }: MapProps) {
   return (
     <GoogleMap
       mapContainerStyle={{ width: '100%', height: '100%' }}
-      zoom={10}
+      zoom={7}
       center={center}
     >
       {itineraries.map((location, key) => (

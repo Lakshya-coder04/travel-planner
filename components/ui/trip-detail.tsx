@@ -11,6 +11,7 @@ import { TabsContent, TabsList } from '@radix-ui/react-tabs';
 import { useState } from 'react';
 import { LuMapPin } from 'react-icons/lu';
 import Map from '@/components/Map';
+import SortableItinerary from '@/components/sortable-itinerary';
 
 export type TripWithLocation = Trip & {
   locations: Location[];
@@ -110,7 +111,45 @@ export default function TripDetailClient({ trip }: TripDetailClientProps) {
               <div className='h-72 rounded-lg overflow-hidden shadow'>
                 <Map itineraries={trip.locations} />
               </div>
+              {trip.locations.length === 0 && (
+                <div className='text-center p-4'>
+                  <p>Add Locations to see them on the map.</p>
+
+                  <Link href={`/trips/${trip.id}/itinerary/new`}>
+                    <Button className='cursor-pointer'>
+                      <FaPlus className='mr-2 h-5 w-5' />
+                      Add Location
+                    </Button>
+                  </Link>
+                </div>
+              )}
+
+              <div>
+                <p className='text-gray-600 leading-relaxed'>
+                  {trip.description}
+                </p>
+              </div>
             </div>
+          </TabsContent>
+
+          <TabsContent value='itinerary' className='space-y-6'>
+            <div className='flex justify-between items-center mb-4'>
+              <h2 className='text-2xl font-bold'>Full Itinerary</h2>
+            </div>
+            {trip.locations.length === 0 ? (
+              <div className='text-center p-4'>
+                <p>Add Locations to see them on the itinerary</p>
+
+                <Link href={`/trips/${trip.id}/itinerary/new`}>
+                  <Button className='cursor-pointer'>
+                    <FaPlus className='mr-2 h-5 w-5' />
+                    Add Location
+                  </Button>
+                </Link>
+              </div>
+            ) : (
+              <SortableItinerary locations={trip.locations} tripId={trip.id} />
+            )}
           </TabsContent>
         </Tabs>
       </div>
