@@ -1,7 +1,9 @@
 'use client';
+import { useRef } from 'react';
 import Globe, { GlobeMethods } from 'react-globe.gl';
 
 export default function GoldePage() {
+  const globeRef = useRef<GlobeMethods | undefined>(undefined);
   return (
     <div className='min-h-screen bg-gradient-to-b from-[#fff] to to-gray-400'>
       <div className='container mx-auto px-4 py-12'>
@@ -16,7 +18,22 @@ export default function GoldePage() {
                 <h2 className='text-2xl font-semibold mb-4'>
                   See where you've been...
                 </h2>
-                <div className='h-[600px] w-full relative'></div>
+                <div className='h-[600px] w-full relative'>
+                  <Globe
+                    ref={globeRef}
+                    globeImageUrl='//unpkg.com/three-globe/example/img/earth-blue-marble.jpg'
+                    bumpImageUrl='//unpkg.com/three-globe/example/img/earth-topology.png'
+                    backgroundColor='rgba(0,0,0,0)'
+                    pointColor={() => '#FF5733'}
+                    pointLabel='name'
+                    // pointsData={locations}
+                    pointRadius={0.5}
+                    pointAltitude={0.1}
+                    pointsMerge={true}
+                    width={800}
+                    height={600}
+                  />
+                </div>
               </div>
             </div>
           </div>
