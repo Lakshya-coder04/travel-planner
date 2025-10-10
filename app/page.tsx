@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 import React from 'react';
 import { auth } from '@/auth';
 import AuthButton from '@/components/auth-button';
