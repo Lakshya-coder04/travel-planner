@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
 import { auth } from '@/auth';
 import { getCountryfromCoordinates } from '@/lib/actions/geocode';
 import { prisma } from '@/lib/prisma';
@@ -43,6 +45,7 @@ export async function GET() {
 
     return NextResponse.json(transformedLocations);
   } catch (err) {
+    console.error('API /api/trips failed:', err);
     return new NextResponse('Internal Error', { status: 500 });
   }
 }
