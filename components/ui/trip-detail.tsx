@@ -1,6 +1,6 @@
 'use client';
 
-import { Trip } from '@/app/generated/prisma';
+import { Trip, Location } from '@/app/generated/prisma';
 import Image from 'next/image';
 import Link from 'next/link';
 import { SlCalender } from 'react-icons/sl';
