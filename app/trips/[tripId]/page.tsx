@@ -1,3 +1,5 @@
+'use server';
+
 import { auth } from '@/auth';
 import TripDetailClient from '@/components/ui/trip-detail';
 import { prisma } from '@/lib/prisma';
