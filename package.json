@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "dotenv -e .env.local -- next build --no-lint",
+    "build": "npx prisma generate && dotenv -e .env.local -- next build --no-lint",
+     "build:netlify": "npx prisma generate && dotenv -e .env.local -- next build --no-lint",
     "start": "next start",
     "lint": "next lint"
   },
