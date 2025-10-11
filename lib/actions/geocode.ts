@@ -1,3 +1,5 @@
+'use server';
+
 interface GeoCodeResult {
   country: string;
   formattedAddress: string;
